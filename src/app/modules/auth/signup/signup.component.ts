@@ -1,24 +1,28 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required]),
+export class SignupComponent implements OnInit {
+  registerForm = new FormGroup({
+    email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
-    remember: new FormControl(false)
+    repeatPassword: new FormControl('', [Validators.required]),
   });
 
   get email() {
-    return this.loginForm.get('email');
+    return this.registerForm.get('email');
   }
 
   get password() {
-    return this.loginForm.get('password');
+    return this.registerForm.get('password');
+  }
+
+  get repeatPassword() {
+    return this.registerForm.get('repeatPassword');
   }
 
   constructor() { }
@@ -27,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
+    console.log(this.registerForm.value);
   }
 
   getErrorMessage(inputControl: FormControl, inputName: string) {
@@ -39,6 +43,8 @@ export class LoginComponent implements OnInit {
           return inputControl.hasError('email') ? 'Not a valid email' : '';
         case 'password':
           return inputControl.hasError('password') ? 'Not a valid password' : '';
+        case 'repeatPassword':
+          return inputControl.hasError('repeatPassword') ? 'Not a valid password' : '';
         default:
           // Intentionally left blank
           break;

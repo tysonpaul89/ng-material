@@ -1,9 +1,9 @@
 <mat-card class="example-card" [class.mat-elevation-z20]="true">
   <mat-card-header>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>Sign Up</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="example-form">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="example-form">
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
@@ -24,12 +24,16 @@
         </tr>
         <tr>
           <td>
-            <mat-checkbox matInput formControlName="remember">Remember me!</mat-checkbox>
+            <mat-form-field class="example-full-width">
+              <input matInput formControlName="repeatPassword" placeholder="Password" type="password"
+                name="repeatPassword" required>
+              <mat-error *ngIf="email.invalid">{{getErrorMessage(repeatPassword, 'repeatPassword')}}</mat-error>
+            </mat-form-field>
           </td>
         </tr>
         <tr>
           <td>
-            <button mat-raised-button type="submit" color="primary" class="mt-10">Login</button>
+            <button mat-raised-button type="submit" color="primary" class="mt-10">Submit</button>
           </td>
         </tr>
       </table>
@@ -40,7 +44,7 @@
   <mat-card-actions>
     <table align="center">
       <tr>
-        <td>Don't have an account?&nbsp;<a [routerLink]="['/auth/sign-up']">Sign Up</a></td>
+        <td>Already have an account? Click here to&nbsp;<a [routerLink]="['/auth/login']">Login</a></td>
       </tr>
       <tr>
         <td><a href="#">Forgot your password?</a></td>
